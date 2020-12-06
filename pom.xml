@@ -10,6 +10,8 @@
 
     <modules>
         <module>cloud-provider-payment8001</module>
+        <module>cloud-consumer-order80</module>
+        <module>cloud-api-commons</module>
     </modules>
     <packaging>pom</packaging>
 
@@ -34,16 +36,23 @@
         <hutool-all.version>5.1.0</hutool-all.version>
     </properties>
 
-     <!-- 子模块继承之后，提供作用：锁定版本 + 子module不用谢groupId和version -->
+    <distributionManagement>
+        <site>
+            <id>website</id>
+            <url>scp://webhost.company.com/www/website</url>
+        </site>
+    </distributionManagement>
+
+    <!-- 子模块继承之后，提供作用：锁定版本 + 子module不用谢groupId和version -->
     <dependencyManagement>
         <dependencies>
             <!--spring boot 2.2.2-->
             <dependency>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-dependencies</artifactId>
-                    <version>2.2.2.RELEASE</version>
-                    <type>pom</type>
-                    <scope>import</scope>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>2.2.2.RELEASE</version>
+                <type>pom</type>
+                <scope>import</scope>
             </dependency>
             <!--spring cloud Hoxton.SR1-->
             <dependency>
@@ -114,6 +123,16 @@
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>
+        </repository>
+
+        <repository>
+            <id>JBoss repository</id>
+            <url>https://repository.jboss.org/nexus/content/repositories/releases/</url>
+        </repository>
+
+        <repository>
+            <id>maven</id>
+            <url>https://repo1.maven.org/maven2/</url>
         </repository>
     </repositories>
 
