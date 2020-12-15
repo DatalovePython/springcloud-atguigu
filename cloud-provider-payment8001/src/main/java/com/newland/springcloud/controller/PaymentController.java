@@ -46,7 +46,7 @@ public class PaymentController {
     @GetMapping(value = "/payment/get/{id}")
     public CommonResult<Payment> getPaymentById(@PathVariable("id") Long id) {
         Payment result = paymentService.getPaymentById(id);
-        log.info("******查询结果" + result + " 测试热部署");
+        log.info("******查询结果" + result);
 
         if (result != null) {
             return new CommonResult(200, "查询成功,serverPort:" + serverPort, result);
@@ -74,6 +74,12 @@ public class PaymentController {
 
         return this.discoveryClient;
 
+    }
+
+    // 配合自建轮询算法测试
+    @GetMapping(value = "/payment/lb")
+    public String getPaymentByLb(){
+        return serverPort;
     }
 
 }
