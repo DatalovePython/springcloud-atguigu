@@ -78,7 +78,20 @@ public class PaymentController {
 
     // 配合自建轮询算法测试
     @GetMapping(value = "/payment/lb")
-    public String getPaymentByLb(){
+    public String getPaymentByLb() {
+        return serverPort;
+    }
+
+    // feign 超时调用测试
+    @GetMapping(value = "/payment/feign/timeout")
+    public String paymentFeignTimeout() {
+
+        try {
+            Thread.sleep(3000);
+        } catch (Exception e) {
+
+        }
+
         return serverPort;
     }
 
