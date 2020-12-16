@@ -23,6 +23,8 @@ public class PaymentController {
     @Value("${server.port}")
     private String serverPort;
 
+
+    // 普通请求，短时间内响应
     @GetMapping("/payment/hystrix/ok/{id}")
     public String paymentInfo_OK(@PathVariable("id") Integer id) {
         String result = paymentService.paymentInfo_OK(id);
@@ -30,6 +32,7 @@ public class PaymentController {
         return result;
     }
 
+    // 测试请求，长时间后响应
     @GetMapping("/payment/hystrix/timeout/{id}")
     public String paymentInfo_Timeout(@PathVariable("id") Integer id) {
         String result = paymentService.paymentInfo_Timeout(id);
@@ -37,6 +40,7 @@ public class PaymentController {
         return result;
     }
 
+    // 服务熔断测试
     @GetMapping("/payment/circuit/{id}")
     public String paymentCircuitBreaker(@PathVariable("id") Integer id) {
         String result = paymentService.paymentCircuitBreaker(id);
