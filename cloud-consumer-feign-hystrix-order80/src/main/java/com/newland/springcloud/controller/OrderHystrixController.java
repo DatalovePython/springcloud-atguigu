@@ -14,29 +14,25 @@ import javax.annotation.Resource;
 
 @RestController
 @Slf4j
-//@DefaultProperties(defaultFallback = "paymentInfo_Global_FallbackMethod")
+// hystrix 中 全局 fallback处理 -- 分别配置通用的和独享的异常处理
+@DefaultProperties(defaultFallback = "paymentInfo_Global_FallbackMethod")
 public class OrderHystrixController {
     @Resource
     private PaymentHystrixService paymentHystrixService;
 
     @GetMapping("/consumer/payment/hystrix/timeout/{id}")
-    @HystrixCommand(fallbackMethod = "paymentInfo_TimeoutFallbackMethod",commandProperties = {
-            @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds",value = "2000")
-    })
+    // 此处会有指定的fallback兜底并能配置相关属性
+//    @HystrixCommand(fallbackMethod = "paymentInfo_TimeoutFallbackMethod",commandProperties = {
+//            @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds",value = "2000")
+//    })
+    // 此时会有fallback兜底
+    @HystrixCommand
     public String paymentInfo_Timeout(@PathVariable("id") Integer id){
         // 执行异常或者超时 都能被hystrixCommand 捕获
         int age = 10/0;
         String result = paymentHystrixService.paymentInfo_Timeout(id);
         return  result;
     }
-
-
-    public String paymentInfo_TimeoutFallbackMethod(Integer id) {
-        return "/(ToT)/我是消费者80，调用8001支付系统繁忙，请10秒钟后重新尝试、\t";
-    }
-
-
-
 
     @GetMapping("/consumer/payment/hystrix/ok/{id}")
     public String paymentInfo_OK(@PathVariable("id") Integer id){
