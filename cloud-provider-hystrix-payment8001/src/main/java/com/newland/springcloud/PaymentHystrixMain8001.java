@@ -16,7 +16,7 @@ import javax.servlet.ServletRegistration;
  */
 @SpringBootApplication
 @EnableEurekaClient
-//@EnableCircuitBreaker
+@EnableCircuitBreaker
 public class PaymentHystrixMain8001 {
 
     public static void main(String[] args) {

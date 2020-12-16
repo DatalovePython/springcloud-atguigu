@@ -29,10 +29,14 @@ public class PaymentService {
      * 超时访问，演示降级
      * @param id
      * @return
+     *
+     * fallbackMethod 提供兜底的方法
+     *
+     * commandProperties 设置自身调用超时时间的峰值，峰值内可以正常运行，
      */
-//    @HystrixCommand(fallbackMethod = "paymentInfo_TimeoutHandler",commandProperties = {
-//            @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds",value = "5000")
-//    })
+    @HystrixCommand(fallbackMethod = "paymentInfo_TimeoutHandler",commandProperties = {
+            @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds",value = "5000")
+    })
     public String paymentInfo_Timeout(Integer id) {
         int timeNumber = 3;
         try {

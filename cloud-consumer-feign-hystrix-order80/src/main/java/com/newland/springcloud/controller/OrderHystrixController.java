@@ -20,14 +20,21 @@ public class OrderHystrixController {
     private PaymentHystrixService paymentHystrixService;
 
     @GetMapping("/consumer/payment/hystrix/timeout/{id}")
-//    @HystrixCommand(fallbackMethod = "paymentInfo_TimeoutFallbackMethod",commandProperties = {
-//            @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds",value = "2000")
-//    })
-//    @HystrixCommand
+    @HystrixCommand(fallbackMethod = "paymentInfo_TimeoutFallbackMethod",commandProperties = {
+            @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds",value = "2000")
+    })
     public String paymentInfo_Timeout(@PathVariable("id") Integer id){
+        // 执行异常或者超时 都能被hystrixCommand 捕获
+        int age = 10/0;
         String result = paymentHystrixService.paymentInfo_Timeout(id);
         return  result;
     }
+
+
+    public String paymentInfo_TimeoutFallbackMethod(Integer id) {
+        return "/(ToT)/我是消费者80，调用8001支付系统繁忙，请10秒钟后重新尝试、\t";
+    }
+
 
 
 
