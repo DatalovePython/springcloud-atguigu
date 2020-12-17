@@ -3,7 +3,7 @@ package com.newland.springcloud.service;
 import org.springframework.stereotype.Component;
 
 /**
- * @Author EiletXie
+ * @Author luzc
  * @Since 2020/3/11 22:40
  */
 @Component

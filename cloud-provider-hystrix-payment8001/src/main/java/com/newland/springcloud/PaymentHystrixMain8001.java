@@ -28,14 +28,14 @@ public class PaymentHystrixMain8001 {
      * ServletRegistrationBean因为SpringBoot的默认路径不是 “/hystrix.stream"
      * 只要在自己的项目里配置上下的servlet就可以了
      */
-//    @Bean
-//    public ServletRegistrationBean getServlet() {
-//        HystrixMetricsStreamServlet streamServlet = new HystrixMetricsStreamServlet() ;
-//        ServletRegistrationBean registrationBean = new ServletRegistrationBean(streamServlet);
-//        registrationBean.setLoadOnStartup(1);
-//        registrationBean.addUrlMappings("/hystrix.stream");
-//        registrationBean.setName("HystrixMetricsStreamServlet");
-//        return  registrationBean;
-//    }
+    @Bean
+    public ServletRegistrationBean getServlet() {
+        HystrixMetricsStreamServlet streamServlet = new HystrixMetricsStreamServlet() ;
+        ServletRegistrationBean registrationBean = new ServletRegistrationBean(streamServlet);
+        registrationBean.setLoadOnStartup(1);
+        registrationBean.addUrlMappings("/hystrix.stream");
+        registrationBean.setName("HystrixMetricsStreamServlet");
+        return  registrationBean;
+    }
 }
 
