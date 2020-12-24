@@ -20,11 +20,11 @@ spring:
         - id: payment_route2
 #          uri: http://localhost:8001
           uri: lb://cloud-payment-service
-          predicates:
+          predicates:                                                  # 说白了。predicate就是为了实现一组匹配规则，让请求过来找到对应的Route进行处理
           - Path=/payment/lb/** #断言,路径相匹配的进行路由
-#          - After=2020-03-12T15:44:15.064+08:00[Asia/Shanghai]
-          #- Cookie=username,eiletxie   #带Cookie，并且username的值为eiletxie
-          #- Header=X-Request-Id,\d+ #请求头要有 X-Request-Id属性并且值为整数的正则表达式
+          - After=2020-03-12T15:44:15.064+08:00[Asia/Shanghai]          # 时间和地址都要匹配成功，才会走网关,通过 ZonedDateTime 实现类实现
+#          - Cookie=username,luzc   #带Cookie，并且username的值为luzc    # 此时请求地址为  http://localhost:9527/payment/lb --cookie "username=luzc"
+#          - Header=X-Request-Id,\d+ #请求头要有 X-Request-Id属性并且值为整数的正则表达式     http://localhost:9527/payment/lb -H “X-Request-Id:123"
 
 eureka:
   instance:
