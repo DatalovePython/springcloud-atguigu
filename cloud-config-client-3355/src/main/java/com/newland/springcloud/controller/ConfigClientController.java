@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
  * @desc
  */
 @RestController
+// 实现刷新功能，但是该刷新功能需要激活
+// curl -X POST “http://localhost:3355/actuator/refresh”
 @RefreshScope
 public class ConfigClientController {
 
@@ -20,6 +22,8 @@ public class ConfigClientController {
 
     @Value("${server.port}")
     private String serverPort;
+
+    // 正常情况下，需要重启，才能从github拉最新的配置。中心是页面刷新就能自动拉取最新数据，该服务需要重启才行。
 
     @GetMapping("/configInfo")
     public String getConfigInfo() {
