@@ -1,6 +1,7 @@
 server:
   port: 3344
 
+#  http://localhost:3344/master/config-dev.yml
 spring:
   application:
     name: cloud-config-center
