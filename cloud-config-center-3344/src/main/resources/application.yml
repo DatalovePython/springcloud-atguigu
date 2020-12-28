@@ -18,6 +18,19 @@ spring:
           password: Lu@*zhong1565
       ##读取分支
       label: master
+  rabbitmq:
+    host: 192.168.16.129
+    port: 5672
+    username: guest
+    password: guest
+
+#rabbitmq相关设置 ，暴露 bus刷新配置的端点
+# 更新配置方式 curl -X POST "http://localhost:3344/actuator/bus-refresh"
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "bus-refresh"
 
 eureka:
   client:
