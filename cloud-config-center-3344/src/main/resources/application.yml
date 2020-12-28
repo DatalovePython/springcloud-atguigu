@@ -25,7 +25,9 @@ spring:
     password: guest
 
 #rabbitmq相关设置 ，暴露 bus刷新配置的端点
-# 更新配置方式 curl -X POST "http://localhost:3344/actuator/bus-refresh"
+# 更新配置方式 curl -X POST "http://localhost:3344/actuator/bus-refresh" -- 全部实例生效
+# 定点通知： curl -X POST "http://localhost:3344/actuator/bus-refresh/config-client:3355"
+# http://localhost:配置中心的端口号/actuator/bus-refresh/{destination} destination 微服务名称+端口号
 management:
   endpoints:
     web:
