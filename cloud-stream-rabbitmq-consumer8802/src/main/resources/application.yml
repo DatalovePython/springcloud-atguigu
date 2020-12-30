@@ -21,8 +21,9 @@ spring:
           destination: studyExchange #表示要使用的Exchange名称定义
           content-type: application/json #设置消息类型，本次为json，本文要设置为“text/plain”
           binder: defaultRabbit #设置要绑定的消息服务的具体设置
-          group: newland # 如果不做分组，那么默认会生成不同的组，会产生重复消费的现象，当前默认是轮询
-
+          group: newland # 如果不做分组，那么默认会生成不同的组，会有两个问题：
+                        # 会产生重复消费的现象，当前默认是轮询
+                        # 指定了组别后，即使宕机重启，也能拿到这段时间未被消费的消息
 eureka:
   client:
     service-url:
