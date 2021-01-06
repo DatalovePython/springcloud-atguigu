@@ -12,7 +12,8 @@ spring:
         server-addr: localhost:8848 #Nacos作为配置中心地址
         file-extension: yaml #指定yaml格式配置
         # fixme: 注意此处有坑，yaml 和 yml 要分清楚
-#        group: TEST_GROUP
+        group: TEST_GROUP # 这里控制
+        # namespace> group > cluster-dataId(集群） 就是大小不同的分类
 #        namespace: 6fecc7ae-f02f-49ef-ace7-80d2f671df77
 
 # 官网要求：${prefix}-${spring.profile.active}.${file-extension}
